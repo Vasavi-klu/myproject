@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PeerCo</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<!-- Landing Page -->
+<div id="landing-page" class="landing-page">
+  <header class="hero-header">
+    <h1>Collaborative Learning Through Peer Review</h1>
+    <p>Enhance your learning experience with our comprehensive peer review and collaboration platform. Work together, provide feedback, and improve your projects through constructive peer evaluation.</p>
+    <div class="hero-buttons">
+      <button onclick="showOnly('signup-page')" class="action-btn primary">Start Collaborating</button>
+      <button onclick="showOnly('login-page')" class="action-btn secondary">Sign In</button>
+    </div>
+  </header>
+
+  <section class="features-section">
+    <h2>Everything You Need for Effective Peer Review</h2>
+    <p>Powerful tools designed to enhance collaboration and learning outcomes.</p>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <h3>📝 Peer Review</h3>
+        <p>Collaborate with your peers to review and improve each other's work.</p>
+      </div>
+      <div class="feature-card">
+        <h3>🔍 Plagiarism Detection</h3>
+        <p>Ensure originality and academic integrity with built-in plagiarism checks.</p>
+      </div>
+      <div class="feature-card">
+        <h3>📈 Progress Monitoring</h3>
+        <p>Track your learning progress and receive actionable feedback.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+  <!-- Signup Page -->
+  <div id="signup-page" class="login-page">
+    <div class="login-box">
+      <h2>Sign Up</h2>
+      <form id="signup-form">
+        <label>Username</label>
+        <input type="text" id="signup-username" placeholder="8–10 chars, include a special character" required>
+        <div id="signup-username-error" class="error-message"></div>
+
+        <label>Password</label>
+        <input type="password" id="signup-password" placeholder="Min 6 chars, include a letter and a number" required>
+        <div id="signup-password-error" class="error-message"></div>
+
+        <label>Role</label>
+        <select id="signup-role" required>
+          <option value="">-- Select Role --</option>
+          <option value="admin">Admin</option>
+          <option value="student">Student</option>
+        </select>
+        <div id="signup-role-error" class="error-message"></div>
+
+        <button type="submit" class="login-btn">Sign Up</button>
+        <div id="signup-error" class="error-message"></div>
+      </form>
+      <p style="margin-top:10px;">Already have an account?
+        <a href="#" id="go-login">Log In</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- Login Page -->
+  <div id="login-page" class="login-page" style="display:none;">
+    <div class="login-box">
+      <h2>Login</h2>
+      <form id="login-form">
+        <label>Username</label>
+        <input type="text" id="login-username" placeholder="Your username" required>
+        <div id="login-username-error" class="error-message"></div>
+
+        <label>Password</label>
+        <input type="password" id="login-password" placeholder="Your password" required>
+        <div id="login-password-error" class="error-message"></div>
+
+        <button type="submit" class="login-btn">Log In</button>
+        <div id="login-error" class="error-message"></div>
+      </form>
+      <p style="margin-top:10px;">New user?
+        <a href="#" id="go-signup">Sign Up</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- App Container -->
+  <div id="app-container" class="dashboard-container" style="display:none;">
+
+    <!-- Admin Dashboard -->
+    <div id="admin-dashboard-page" class="page-content">
+      <aside class="sidebar">
+        <div class="logo">PeerCo</div>
+        <nav class="nav-menu">
+          <ul>
+            <li><a href="#" data-page-id="admin-dashboard-page" class="nav-link">Dashboard</a></li>
+            <li><a href="#" data-page-id="admin-create-assignment-page" class="nav-link">Create Assignment</a></li>
+            <li><a href="#" data-page-id="admin-submissions-page" class="nav-link">Student Submissions</a></li>
+            <li><a href="#" data-page-id="admin-reviews-page" class="nav-link">Peer Reviews</a></li>
+            <li><a href="#" data-page-id="admin-grading-page" class="nav-link">Grading & Scores</a></li>
+          </ul>
+        </nav>
+      </aside>
+      <main class="main-content">
+        <header class="topbar">
+          <h1>Welcome, Admin</h1>
+          <button class="logout-btn">Logout</button>
+        </header>
+
+        <section class="overview-cards">
+          <div class="card">
+            <h2>Active Assignments</h2>
+            <ul id="admin-assignment-list"></ul>
+          </div>
+          <div class="card">
+            <h2>Recent Submissions</h2>
+            <ul id="admin-recent-submissions"></ul>
+          </div>
+          <div class="card">
+            <h2>Recent Peer Reviews</h2>
+            <ul id="admin-recent-reviews"></ul>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- Admin Create Assignment -->
+    <div id="admin-create-assignment-page" class="page-content">
+      <aside class="sidebar">...</aside>
+      <main class="main-content">
+        <header class="topbar">
+          <h1>Create Peer Review Assignment</h1>
+          <a href="#" data-page-id="admin-dashboard-page" class="nav-action-btn">Back to Dashboard</a>
+        </header>
+
+        <section class="card assignment-form-container">
+          <form id="assignment-form">
+            <label>Assignment Title</label>
+            <input type="text" id="assignment-title" required placeholder="e.g., Web Dev Final Project">
+            <div id="assignment-title-error" class="error-message"></div>
+
+            <div class="form-group-inline">
+              <div>
+                <label>Submission Deadline</label>
+                <input type="date" id="submission-deadline" required>
+                <div id="submission-deadline-error" class="error-message"></div>
+              </div>
+              <div>
+                <label>Review Deadline</label>
+                <input type="date" id="review-deadline" required>
+                <div id="review-deadline-error" class="error-message"></div>
+              </div>
+            </div>
+
+            <label>Review Criteria</label>
+            <select id="review-criteria" required>
+              <option value="">-- Select Criteria --</option>
+              <option>Standard 5-Point Rubric</option>
+              <option>Detailed 10-Point Rubric</option>
+            </select>
+            <div id="review-criteria-error" class="error-message"></div>
+
+            <button type="submit" class="action-btn primary" style="width: 100%; margin-top: 20px;">
+              Create Assignment
+            </button>
+            <div id="assignment-form-error" class="error-message" style="margin-top:10px;"></div>
+          </form>
+        </section>
+      </main>
+    </div>
+
+    <!-- Admin Submissions -->
+    <div id="admin-submissions-page" class="page-content">
+      <aside class="sidebar">...</aside>
+      <main class="main-content">
+        <header class="topbar">
+          <h1>Student Submissions</h1>
+          <a href="#" data-page-id="admin-dashboard-page" class="nav-action-btn">Back to Dashboard</a>
+        </header>
+        <section class="card">
+          <table class="plagiarism-table">
+            <thead>
+              <tr><th>Student</th><th>Assignment</th><th>Status</th><th>Actions</th></tr>
+            </thead>
+            <tbody id="admin-submissions-table"></tbody>
+          </table>
+        </section>
+      </main>
+    </div>
+
+    <!-- Admin Reviews -->
+    <div id="admin-reviews-page" class="page-content">
+      <aside class="sidebar">...</aside>
+      <main class="main-content">
+        <header class="topbar">
+          <h1>Peer Reviews</h1>
+          <a href="#" data-page-id="admin-dashboard-page" class="nav-action-btn">Back to Dashboard</a>
+        </header>
+        <section class="card">
+          <table class="plagiarism-table">
+            <thead>
+              <tr><th>Reviewer</th><th>Student</th><th>Assignment</th><th>Clarity</th><th>Technical</th><th>Feedback</th></tr>
+            </thead>
+            <tbody id="admin-reviews-table"></tbody>
+          </table>
+        </section>
+      </main>
+    </div>
+
+    <!-- Admin Grading -->
+    <div id="admin-grading-page" class="page-content">
+      <aside class="sidebar">...</aside>
+      <main class="main-content">
+        <header class="topbar">
+          <h1>Manual Grading & Score Input</h1>
+          <a href="#" data-page-id="admin-dashboard-page" class="nav-action-btn">Back to Dashboard</a>
+        </header>
+        <section class="card">
+          <table class="plagiarism-table">
+            <thead>
+              <tr><th>Student</th><th>Assignment</th><th>Peer Avg (5)</th><th>Admin Score (/100)</th><th>Grade</th><th>Save</th></tr>
+            </thead>
+            <tbody id="admin-grading-table"></tbody>
+          </table>
+        </section>
+      </main>
+    </div>
+
+    <!-- Student Dashboard -->
+    <div id="student-dashboard-page" class="page-content">
+      <aside class="sidebar">
+        <div class="logo">PeerPlatform (S)</div>
+        <nav class="nav-menu">
+          <ul>
+            <li><a href="#" data-page-id="student-dashboard-page" class="nav-link">My Dashboard</a></li>
+            <li><a href="#" data-page-id="student-assignments-page" class="nav-link">Assignments</a></li>
+            <li><a href="#" data-page-id="student-project-page" class="nav-link">Project Workspace</a></li>
+            <li><a href="#" data-page-id="student-pending-review-page" class="nav-link">Pending Reviews</a></li>
+            <li><a href="#" data-page-id="student-my-projects-page" class="nav-link">My Projects & Scores</a></li>
+          </ul>
+        </nav>
+      </aside>
+      <main class="main-content">
+        <header class="topbar">
+          <h1>Welcome!</h1>
+          <button class="logout-btn">Logout</button>
+        </header>
+
+        <section class="overview-cards">
+          <div class="card">
+            <h2>Active Assignments</h2>
+            <ul id="student-active-assignments"></ul>
+          </div>
+          <div class="card">
+            <h2>My Submissions</h2>
+            <ul id="student-recent-submissions"></ul>
+          </div>
+          <div class="card">
+            <h2>My Grades</h2>
+            <ul id="student-recent-grades"></ul>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- Student Assignments -->
+    <div id="student-assignments-page" class="page-content">
+      <aside class="sidebar">...</aside>
+      <main class="main-content">
+        <header class="topbar">
+          <h1>Assignments</h1>
+          <a href="#" data-page-id="student-dashboard-page" class="nav-action-btn">Back to Dashboard</a>
+        </header>
+        <section class="card">
+          <table class="plagiarism-table">
+            <thead>
+              <tr><th>Title</th><th>Submission Deadline</th><th>Review Deadline</th><th>Status</th></tr>
+            </thead>
+            <tbody id="student-assignments-table"></tbody>
+          </table>
+        </section>
+      </main>
+    </div>
+
+    <!-- Student Project Workspace -->
+    <div id="student-project-page" class="page-content">
+      <aside class="sidebar">...</aside>
+      <main class="main-content">
+        <header class="topbar">
+          <h1>Project Workspace</h1>
+          <a href="#" data-page-id="student-dashboard-page" class="nav-action-btn">Back to Dashboard</a>
+        </header>
+        <section class="card">
+          <label>Choose Assignment</label>
+          <select id="project-assignment-select"></select>
+          <div id="project-assignment-error" class="error-message"></div>
+
+          <textarea id="code-editor" style="width: 100%; min-height: 300px; padding: 15px; font-family: monospace; border: 1px solid #ccc;">// Your project code or design notes go here.</textarea>
+          <div id="project-content-error" class="error-message"></div>
+
+          <div class="action-buttons" style="margin-top: 15px;">
+            <button id="save-progress-btn" class="action-btn secondary">Save Progress</button>
+            <button id="submit-project-btn" class="action-btn primary">Submit Project for Review</button>
+          </div>
+        </section>
+
+        <section class="card" style="margin-top: 20px;">
+          <h2>Current Submission Status</h2>
+          <p id="current-submission-status" style="color: var(--secondary-color);">No submission yet.</p>
+        </section>
+      </main>
+    </div>
+
+    <!-- Student Pending Reviews -->
+    <div id="student-pending-review-page" class="page-content">
+      <aside class="sidebar">...</aside>
+      <main class="main-content">
+        <header class="topbar">
+          <h1>Pending Peer Reviews</h1>
+          <a href="#" data-page-id="student-dashboard-page" class="nav-action-btn">Back to Dashboard</a>
+        </header>
+        <section class="card">
+          <ul id="student-pending-reviews"></ul>
+        </section>
+      </main>
+    </div>
+
+    <!-- Student Review Page -->
+    <div id="student-review-page" class="page-content">
+      <aside class="sidebar">...</aside>
+      <main class="main-content">
+        <header class="topbar">
+          <h1 id="review-project-title">Review: [Assignment] for [Student]</h1>
+          <a href="#" data-page-id="student-pending-review-page" class="nav-action-btn">Back to List</a>
+        </header>
+        <section class="review-layout">
+          <div class="review-document card">
+            <h2>View Submitted Work</h2>
+            <div id="review-project-content" class="project-view-content" style="background-color: #f0f0f0; padding: 15px; border-radius: 4px; min-height: 200px;"></div>
+          </div>
+          <div class="review-form card">
+            <form id="peer-review-form">
+              <h3>Structured Peer Review</h3>
+
+              <label>1. Clarity of Concept (Rating)</label>
+              <select id="rating-clarity" class="rating-dropdown" onchange="checkCriticalReview()">
+                <option value="5">5 - Excellent</option><option value="4">4 - Good</option><option value="2">2 - Poor</option><option value="1">1 - Critical (Red Flag)</option>
+              </select>
+              <div id="rating-clarity-error" class="error-message"></div>
+
+              <label>2. Technical Execution (Rating)</label>
+              <select id="rating-technical" class="rating-dropdown">
+                <option value="5">5 - Excellent</option><option value="4">4 - Good</option><option value="2">2 - Poor</option><option value="1">1 - Critical (Red Flag)</option>
+              </select>
+              <div id="rating-technical-error" class="error-message"></div>
+
+              <label>Overall Constructive Feedback</label>
+              <textarea id="overall-feedback" placeholder="Provide constructive feedback..."></textarea>
+              <div id="overall-feedback-error" class="error-message"></div>
+
+              <div id="critical-suggestion-box" class="card critical-box" style="display: none;">
+                <label style="color: var(--danger-color);">CRITICAL SUGGESTIONS (Mandatory for score 1)</label>
+                <textarea id="critical-suggestions" placeholder="Specifically list required improvements/fixes for a critical review."></textarea>
+                <div id="critical-suggestions-error" class="error-message"></div>
+              </div>
+
+              <button type="submit" class="action-btn primary" style="width: 100%; margin-top: 20px;">Submit Review</button>
+              <div id="peer-review-form-error" class="error-message" style="margin-top:10px;"></div>
+            </form>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- Student My Projects & Scores -->
+    <div id="student-my-projects-page" class="page-content">
+      <aside class="sidebar">...</aside>
+      <main class="main-content">
+        <header class="topbar">
+          <h1>My Projects & Scores</h1>
+          <a href="#" data-page-id="student-dashboard-page" class="nav-action-btn">Back to Dashboard</a>
+        </header>
+        <section class="card">
+          <table class="plagiarism-table">
+            <thead><tr><th>Assignment</th><th>Status</th><th>Peer Avg</th><th>Admin Score</th><th>Final Grade</th></tr></thead>
+            <tbody id="student-grades-table"></tbody>
+          </table>
+        </section>
+      </main>
+    </div>
+
+  </div>
+
+  <script src="scripts.js"></script>
+</body>
+</html>

@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /* ---------------- UI helpers ---------------- */
 function showOnly(sectionId) {
-  ['signup-page','login-page','app-container'].forEach(id => {
+  ['landing-page','signup-page','login-page','app-container'].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.style.display = 'none';
   });
